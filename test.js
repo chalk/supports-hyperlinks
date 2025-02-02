@@ -1,5 +1,5 @@
-import test from 'ava';
-import m from '.';
+const test = require('ava');
+const m = require('./index.js');
 
 const isSupported = ({platform, env, argv, stream}) => {
 	platform = platform || 'darwin';
