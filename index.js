@@ -1,36 +1,28 @@
-'use strict';
-const supportsColor = require('supports-color');
-const hasFlag = require('has-flag');
+import process from 'node:process';
+import {createSupportsColor} from 'supports-color';
+import hasFlag from 'has-flag';
 
-/**
-@param {string} versionString
-@returns {{ major: number, minor: number, patch: number }}
-*/
-function parseVersion(versionString) {
+function parseVersion(versionString = '') {
 	if (/^\d{3,4}$/.test(versionString)) {
 		// Env var doesn't always use dots. example: 4601 => 46.1.0
-		const m = /(\d{1,2})(\d{2})/.exec(versionString) || [];
+		const match = /(\d{1,2})(\d{2})/.exec(versionString) ?? [];
 		return {
 			major: 0,
-			minor: parseInt(m[1], 10),
-			patch: parseInt(m[2], 10)
+			minor: Number.parseInt(match[1], 10),
+			patch: Number.parseInt(match[2], 10),
 		};
 	}
 
-	const versions = (versionString || '').split('.').map(n => parseInt(n, 10));
+	const versions = (versionString ?? '').split('.').map(n => Number.parseInt(n, 10));
 	return {
 		major: versions[0],
 		minor: versions[1],
-		patch: versions[2]
+		patch: versions[2],
 	};
 }
 
-/**
-@param {{ isTTY?: boolean | undefined }} stream
-@returns {boolean}
-*/
 // eslint-disable-next-line complexity
-function supportsHyperlink(stream) {
+export function createSupportsHyperlinks(stream) {
 	const {
 		CI,
 		FORCE_HYPERLINK,
@@ -43,7 +35,7 @@ function supportsHyperlink(stream) {
 	} = process.env;
 
 	if (FORCE_HYPERLINK) {
-		return !(FORCE_HYPERLINK.length > 0 && parseInt(FORCE_HYPERLINK, 10) === 0);
+		return !(FORCE_HYPERLINK.length > 0 && Number.parseInt(FORCE_HYPERLINK, 10) === 0);
 	}
 
 	if (hasFlag('no-hyperlink') || hasFlag('no-hyperlinks') || hasFlag('hyperlink=false') || hasFlag('hyperlink=never')) {
@@ -60,7 +52,7 @@ function supportsHyperlink(stream) {
 	}
 
 	// If they specify no colors, they probably don't want hyperlinks.
-	if (!supportsColor.supportsColor(stream)) {
+	if (!createSupportsColor(stream)) {
 		return false;
 	}
 
@@ -86,22 +78,29 @@ function supportsHyperlink(stream) {
 	}
 
 	if (TERM_PROGRAM) {
-		const version = parseVersion(TERM_PROGRAM_VERSION || '');
+		const version = parseVersion(TERM_PROGRAM_VERSION);
 
 		switch (TERM_PROGRAM) {
-			case 'iTerm.app':
+			case 'iTerm.app': {
 				if (version.major === 3) {
 					return version.minor >= 1;
 				}
 
 				return version.major > 3;
-			case 'WezTerm':
-				return version.major >= 20200620;
-			case 'vscode':
+			}
+
+			case 'WezTerm': {
+				return version.major >= 20_200_620;
+			}
+
+			case 'vscode': {
 				// eslint-disable-next-line no-mixed-operators
 				return version.major > 1 || version.major === 1 && version.minor >= 72;
-			case 'ghostty':
+			}
+
+			case 'ghostty': {
 				return true;
+			}
 			// No default
 		}
 	}
@@ -117,17 +116,19 @@ function supportsHyperlink(stream) {
 	}
 
 	switch (TERM) {
-		case 'alacritty':
+		case 'alacritty': {
 			// Support added in v0.11 (2022-10-13)
 			return true;
+		}
 		// No default
 	}
 
 	return false;
 }
 
-module.exports = {
-	supportsHyperlink,
-	stdout: supportsHyperlink(process.stdout),
-	stderr: supportsHyperlink(process.stderr)
+const supportsHyperlinks = {
+	stdout: createSupportsHyperlinks(process.stdout),
+	stderr: createSupportsHyperlinks(process.stderr),
 };
+
+export default supportsHyperlinks;
