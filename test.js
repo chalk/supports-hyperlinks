@@ -219,6 +219,29 @@ test('supported vscode >= 1.72.0 tty stream', t => {
 	}));
 });
 
+test('supported Cursor (vscode fork) no stream supplied', t => {
+	t.true(isSupported({
+		env: {
+			CURSOR_TRACE_ID: 'some-trace-id',
+			TERM_PROGRAM: 'vscode',
+			TERM_PROGRAM_VERSION: '0.49.6',
+		},
+	}));
+});
+
+test('supported Cursor (vscode fork) tty stream', t => {
+	t.true(isSupported({
+		env: {
+			CURSOR_TRACE_ID: 'some-trace-id',
+			TERM_PROGRAM: 'vscode',
+			TERM_PROGRAM_VERSION: '0.49.6',
+		},
+		stream: {
+			isTTY: true,
+		},
+	}));
+});
+
 test('supported ghostty no stream supplied', t => {
 	t.true(isSupported({
 		env: {
