@@ -25,6 +25,7 @@ function parseVersion(versionString = '') {
 export function createSupportsHyperlinks(stream) {
 	const {
 		CI,
+		CURSOR_TRACE_ID,
 		FORCE_HYPERLINK,
 		NETLIFY,
 		TEAMCITY_VERSION,
@@ -94,6 +95,11 @@ export function createSupportsHyperlinks(stream) {
 			}
 
 			case 'vscode': {
+				// Cursor forked VS Code and supports hyperlinks in 0.x.x
+				if (CURSOR_TRACE_ID) {
+					return true;
+				}
+
 				// eslint-disable-next-line no-mixed-operators
 				return version.major > 1 || version.major === 1 && version.minor >= 72;
 			}
