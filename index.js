@@ -126,6 +126,10 @@ export function createSupportsHyperlinks(stream) {
 			// Support added in v0.11 (2022-10-13)
 			return true;
 		}
+
+		case 'xterm-kitty': {
+			return true;
+		}
 		// No default
 	}
 

@@ -317,6 +317,14 @@ test('supported in alacritty', t => {
 	}));
 });
 
+test('supported in kitty', t => {
+	t.true(isSupported({
+		env: {
+			TERM: 'xterm-kitty',
+		},
+	}));
+});
+
 test('empty env not supported', t => {
 	t.false(isSupported({env: {}}));
 });
