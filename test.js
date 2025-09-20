@@ -135,6 +135,30 @@ test('not supported WezTerm 20200608, tty stream', t => {
 	}));
 });
 
+test('supported WezTerm 20200620 packaged by Nix, tty stream', t => {
+	t.true(isSupported({
+		env: {
+			TERM_PROGRAM: 'WezTerm',
+			TERM_PROGRAM_VERSION: '0-unstable-2020-06-20',
+		},
+		stream: {
+			isTTY: true,
+		},
+	}));
+});
+
+test('not supported WezTerm 20200608 packaged by Nix, tty stream', t => {
+	t.false(isSupported({
+		env: {
+			TERM_PROGRAM: 'WezTerm',
+			TERM_PROGRAM_VERSION: '0-unstable-2020-06-08',
+		},
+		stream: {
+			isTTY: true,
+		},
+	}));
+});
+
 test('not supported vscode <= 1.0 no stream supplied', t => {
 	t.false(isSupported({
 		env: {

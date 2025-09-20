@@ -91,7 +91,15 @@ export function createSupportsHyperlinks(stream) {
 			}
 
 			case 'WezTerm': {
-				return version.major >= 20_200_620;
+				// WezTerm packaged by Nix uses their own version scheme.
+				if (/^0-unstable-\d{4}-\d{2}-\d{2}$/.test(TERM_PROGRAM_VERSION)) {
+					const date = TERM_PROGRAM_VERSION.slice('0-unstable-'.length);
+					return date >= '2020-06-20';
+				}
+
+				// This number is a date and reads better grouped as such.
+				// eslint-disable-next-line unicorn/numeric-separators-style
+				return version.major >= 2020_06_20;
 			}
 
 			case 'vscode': {
