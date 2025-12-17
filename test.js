@@ -349,6 +349,25 @@ test('supported in kitty', t => {
 	}));
 });
 
+test('supported zed no stream supplied', t => {
+	t.true(isSupported({
+		env: {
+			TERM_PROGRAM: 'zed',
+		},
+	}));
+});
+
+test('supported zed tty stream', t => {
+	t.true(isSupported({
+		env: {
+			TERM_PROGRAM: 'zed',
+		},
+		stream: {
+			isTTY: true,
+		},
+	}));
+});
+
 test('empty env not supported', t => {
 	t.false(isSupported({env: {}}));
 });

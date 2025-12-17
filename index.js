@@ -115,7 +115,12 @@ export function createSupportsHyperlinks(stream) {
 			case 'ghostty': {
 				return true;
 			}
-			// No default
+
+			case 'zed': {
+				return true;
+			}
+
+		// No default
 		}
 	}
 
