@@ -30,67 +30,57 @@ const isSupported = ({
 };
 
 test('supported iTerm.app 3.1, tty stream', t => {
-	t.true(isSupported(
-		{
-			env: {
-				TERM_PROGRAM: 'iTerm.app',
-				TERM_PROGRAM_VERSION: '3.1.0',
-			},
-			stream: {
-				isTTY: true,
-			},
+	t.true(isSupported({
+		env: {
+			TERM_PROGRAM: 'iTerm.app',
+			TERM_PROGRAM_VERSION: '3.1.0',
 		},
-	));
+		stream: {
+			isTTY: true,
+		},
+	}));
 });
 
 test('supported iTerm.app 3.1, no stream supplied', t => {
-	t.true(isSupported(
-		{
-			env: {
-				TERM_PROGRAM: 'iTerm.app',
-				TERM_PROGRAM_VERSION: '3.1.0',
-			},
+	t.true(isSupported({
+		env: {
+			TERM_PROGRAM: 'iTerm.app',
+			TERM_PROGRAM_VERSION: '3.1.0',
 		},
-	));
+	}));
 });
 
 test('supported iTerm.app 4.0, no stream supplied', t => {
-	t.true(isSupported(
-		{
-			env: {
-				TERM_PROGRAM: 'iTerm.app',
-				TERM_PROGRAM_VERSION: '4.0.0',
-			},
+	t.true(isSupported({
+		env: {
+			TERM_PROGRAM: 'iTerm.app',
+			TERM_PROGRAM_VERSION: '4.0.0',
 		},
-	));
+	}));
 });
 
 test('not supported iTerm 3.0, tty stream', t => {
-	t.false(isSupported(
-		{
-			env: {
-				TERM_PROGRAM: 'iTerm.app',
-				TERM_PROGRAM_VERSION: '3.0.0',
-			},
-			stream: {
-				isTTY: true,
-			},
+	t.false(isSupported({
+		env: {
+			TERM_PROGRAM: 'iTerm.app',
+			TERM_PROGRAM_VERSION: '3.0.0',
 		},
-	));
+		stream: {
+			isTTY: true,
+		},
+	}));
 });
 
 test('not supported iTerm 3.1, non-tty stream', t => {
-	t.false(isSupported(
-		{
-			env: {
-				TERM_PROGRAM: 'iTerm.app',
-				TERM_PROGRAM_VERSION: '3.1.0',
-			},
-			stream: {
-				isTTY: false,
-			},
+	t.false(isSupported({
+		env: {
+			TERM_PROGRAM: 'iTerm.app',
+			TERM_PROGRAM_VERSION: '3.1.0',
 		},
-	));
+		stream: {
+			isTTY: false,
+		},
+	}));
 });
 
 test('not supported WezTerm 20200620 no stream supplied', t => {

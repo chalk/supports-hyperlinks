@@ -15,7 +15,9 @@
 		"node": ">=20"
 	},
 	"scripts": {
-		"test": "xo && ava && tsc index.d.ts"
+		"test": "xo && ava && tsc index.d.ts",
+		"lint": "xo",
+		"lint:fix": "xo --fix"
 	},
 	"files": [
 		"index.js",
