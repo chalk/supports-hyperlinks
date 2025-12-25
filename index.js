@@ -108,14 +108,19 @@ export function createSupportsHyperlinks(stream) {
 					return true;
 				}
 
-				// eslint-disable-next-line no-mixed-operators
+				// eslint-disable-next-line @stylistic/no-mixed-operators
 				return version.major > 1 || version.major === 1 && version.minor >= 72;
 			}
 
 			case 'ghostty': {
 				return true;
 			}
-			// No default
+
+			case 'zed': {
+				return true;
+			}
+
+		// No default
 		}
 	}
 
