@@ -40,5 +40,6 @@ Can be overridden by the user with the flags `--hyperlinks=always` and `--no-hyp
 
 ## Related
 
+- [terminal-link](https://github.com/sindresorhus/terminal-link) - Create clickable links in the terminal
 - [supports-color](https://github.com/chalk/supports-color) - Detect whether a terminal supports color
 - [supports-terminal-graphics](https://github.com/sindresorhus/supports-terminal-graphics) - Detect which terminal graphics protocols are supported
