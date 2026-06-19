@@ -120,6 +120,12 @@ export function createSupportsHyperlinks(stream) {
 				return true;
 			}
 
+			case 'Orca': {
+				// Orca is an Electron-based terminal (xterm.js + OSC 8
+				// linkHandler). https://github.com/stablyai/orca
+				return true;
+			}
+
 		// No default
 		}
 	}

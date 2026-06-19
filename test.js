@@ -358,6 +358,25 @@ test('supported zed tty stream', t => {
 	}));
 });
 
+test('supported Orca no stream supplied', t => {
+	t.true(isSupported({
+		env: {
+			TERM_PROGRAM: 'Orca',
+		},
+	}));
+});
+
+test('supported Orca tty stream', t => {
+	t.true(isSupported({
+		env: {
+			TERM_PROGRAM: 'Orca',
+		},
+		stream: {
+			isTTY: true,
+		},
+	}));
+});
+
 test('empty env not supported', t => {
 	t.false(isSupported({env: {}}));
 });
