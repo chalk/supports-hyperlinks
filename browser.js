@@ -1,3 +1,4 @@
+// eslint-disable-next-line unicorn/consistent-boolean-name -- The exported name is part of the published API.
 export function createSupportsHyperlinks() {
 	return false;
 }
