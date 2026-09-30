@@ -377,6 +377,25 @@ test('supported Orca tty stream', t => {
 	}));
 });
 
+test('supported Warp no stream supplied', t => {
+	t.true(isSupported({
+		env: {
+			TERM_PROGRAM: 'WarpTerminal',
+		},
+	}));
+});
+
+test('supported Warp tty stream', t => {
+	t.true(isSupported({
+		env: {
+			TERM_PROGRAM: 'WarpTerminal',
+		},
+		stream: {
+			isTTY: true,
+		},
+	}));
+});
+
 test('empty env not supported', t => {
 	t.false(isSupported({env: {}}));
 });

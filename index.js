@@ -126,6 +126,10 @@ export function createSupportsHyperlinks(stream) {
 				return true;
 			}
 
+			case 'WarpTerminal': {
+				return true;
+			}
+
 		// No default
 		}
 	}
