@@ -397,6 +397,27 @@ test('supported Warp tty stream', () => {
 	}), true);
 });
 
+test('supported herdr no stream supplied', () => {
+	assert.strictEqual(isSupported({
+		env: {
+			TERM_PROGRAM: 'herdr',
+			TERM_PROGRAM_VERSION: '0.9.5',
+		},
+	}), true);
+});
+
+test('supported herdr tty stream', () => {
+	assert.strictEqual(isSupported({
+		env: {
+			TERM_PROGRAM: 'herdr',
+			TERM_PROGRAM_VERSION: '0.9.5',
+		},
+		stream: {
+			isTTY: true,
+		},
+	}), true);
+});
+
 test('empty env not supported', () => {
 	assert.ok(!isSupported({env: {}}));
 });

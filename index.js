@@ -109,6 +109,12 @@ export function createSupportsHyperlinks(stream) {
 				return true;
 			}
 
+			case 'herdr': {
+				// Renders OSC 8 hyperlinks since 0.5.6.
+				// https://github.com/herdrdev/herdr
+				return true;
+			}
+
 		// No default
 		}
 	}
