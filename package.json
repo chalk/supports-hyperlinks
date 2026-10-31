@@ -1,6 +1,6 @@
 {
 	"name": "supports-hyperlinks",
-	"version": "4.6.0",
+	"version": "5.0.0",
 	"description": "Detect whether a terminal supports hyperlinks",
 	"license": "MIT",
 	"repository": "chalk/supports-hyperlinks",
